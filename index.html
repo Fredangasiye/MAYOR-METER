@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mayor Meter: who will be Johannesburg’s next mayor?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Luckiest+Guy&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#101a33;--green:#35d07f;--yellow:#ffd23f;--muted:#4a5878}
+*{box-sizing:border-box}
+body{margin:0;background:#eaf8ff;color:var(--ink);font:500 16px/1.4 Fredoka,ui-rounded,system-ui,sans-serif}
+.wrap{max-width:1200px;margin:auto;padding:14px 18px 30px}
+.logo{margin:6px 0 0;text-align:center;font:400 clamp(60px,12.5vw,150px)/.98 'Luckiest Guy',Impact,'Arial Black',sans-serif;letter-spacing:.01em;transform:rotate(-2deg)}
+.wd{display:inline-block;white-space:nowrap;margin:0 .1em}
+.logo .wd>span{display:inline-block;color:var(--c);-webkit-text-stroke:.12em var(--ink);paint-order:stroke fill;filter:drop-shadow(.03em .05em 0 var(--ink)) drop-shadow(.06em .1em 0 var(--ink)) drop-shadow(.09em .15em 0 var(--ink));transform:rotate(var(--r));animation:drop .8s cubic-bezier(.3,1.7,.5,1) backwards,hop 2.8s ease-in-out infinite;animation-delay:calc(var(--i)*.07s),calc(1.3s + var(--i)*.11s)}
+.logo .dial{width:.8em;height:.8em;vertical-align:-.04em;-webkit-text-stroke:0;margin:0 .04em}
+.dial svg{display:block;width:100%;height:100%;overflow:visible}
+.needle{transform-origin:50px 52px;animation:swing 2.4s ease-in-out infinite alternate}
+@keyframes drop{from{translate:0 -1.6em;opacity:0}}
+@keyframes hop{0%,55%,100%{scale:1.04 .94}25%{translate:0 -.14em;scale:.96 1.06}}
+@keyframes swing{from{rotate:-62deg}to{rotate:62deg}}
+.tag{margin:14px auto 22px;text-align:center;font-size:clamp(16px,2.4vw,21px);font-weight:700;color:var(--muted);max-width:640px}
+.hero{position:relative;height:620px;border:4px solid var(--ink);border-radius:28px;overflow:hidden;background:linear-gradient(#7fd3ff,#e2f7ff 78%);box-shadow:0 9px 0 var(--ink);container-type:inline-size}
+.sun{position:absolute;right:7%;top:26px;width:84px;height:84px;border-radius:50%;background:var(--yellow);border:4px solid var(--ink);box-shadow:0 0 0 12px #ffd23f55}
+.far{position:absolute;left:0;right:0;bottom:36px;height:48%;background:#b9e6f7;clip-path:polygon(0 100%,0 70%,4% 70%,4% 52%,8% 52%,8% 64%,12% 64%,12% 40%,15% 40%,15% 58%,20% 58%,20% 46%,24% 46%,24% 66%,29% 66%,29% 34%,32% 30%,35% 34%,35% 60%,41% 60%,41% 50%,46% 50%,46% 68%,52% 68%,52% 42%,56% 42%,56% 62%,62% 62%,62% 48%,66% 48%,66% 56%,72% 56%,72% 36%,75% 36%,75% 60%,81% 60%,81% 52%,86% 52%,86% 66%,92% 66%,92% 44%,96% 44%,96% 62%,100% 62%,100% 100%)}
+.cloud{position:absolute;top:var(--t);left:0;width:110px;height:26px;background:#fff;border:3px solid var(--ink);border-radius:99px;animation:drift var(--s) linear infinite;animation-delay:var(--dl);scale:var(--z,1)}
+.cloud:before,.cloud:after{content:"";position:absolute;background:#fff;border:3px solid var(--ink);border-bottom:0;border-radius:50% 50% 0 0}
+.cloud:before{width:38px;height:28px;left:16px;top:-20px}.cloud:after{width:46px;height:34px;left:50px;top:-26px}
+@keyframes drift{from{transform:translateX(-160px)}to{transform:translateX(calc(100cqw + 160px))}}
+.plane{position:absolute;left:0;top:var(--t);width:var(--w);z-index:1;pointer-events:none;animation:fly var(--s) linear infinite;animation-delay:var(--dl)}
+.plane svg{display:block;width:100%;animation:pitch 3s ease-in-out infinite alternate}
+.plane:before{content:"";position:absolute;right:96%;top:46%;width:260px;height:7px;border-radius:7px;background:linear-gradient(270deg,#fffe,#fff0)}
+@keyframes fly{from{transform:translateX(-320px)}to{transform:translateX(calc(100cqw + 60px))}}
+@keyframes pitch{from{translate:0 -6px;rotate:-1.5deg}to{translate:0 7px;rotate:1.5deg}}
+.city{position:absolute;left:0;right:0;top:0;bottom:36px;z-index:2;display:flex;align-items:flex-end;justify-content:safe center;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;padding:0 10px}
+.ground{position:absolute;left:0;right:0;bottom:0;height:40px;background:var(--green);border-top:4px solid var(--ink);z-index:1}
+.ground:after{content:"JOZI";position:absolute;right:22px;top:-2px;font:400 26px 'Luckiest Guy',Impact,sans-serif;letter-spacing:.14em;color:#fff;-webkit-text-stroke:5px var(--ink);paint-order:stroke fill}
+.bld{position:relative;flex:none;width:var(--w,104px);height:var(--h,0);margin:0 clamp(3px,.9vw,12px);transition:height 1.2s cubic-bezier(.3,1.35,.5,1)}
+.body{position:absolute;inset:0}
+.body i{position:absolute;inset:0;background:var(--win),var(--a)}
+.hill{--w:92px;--a:#7a3b9e;--b:#e0508a}
+.hill i{background:var(--a);clip-path:polygon(35% 0,65% 0,100% 100%,0 100%)}
+.crown{position:absolute;left:50%;bottom:calc(100% - 2px);width:120px;height:190px;margin-left:-60px;overflow:visible}
+.tip{animation:blink 1.2s steps(2) infinite}
+@keyframes blink{50%{fill:#fff}}
+.ponte{--w:98px;--win:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='18'%3E%3Crect x='3' y='2' width='4' height='14' fill='white' fill-opacity='.85'/%3E%3C/svg%3E")}
+.ponte i{border-radius:50% 50% 0 0/14px 14px 0 0}
+.ponte i:before{content:"";position:absolute;left:0;right:0;top:-9px;height:18px;border-radius:50%;background:#1a0b2e;border:3px solid var(--b)}
+.ponte i:after{content:"";position:absolute;left:0;right:0;top:22px;height:14px;background:var(--b)}
+.carlton{--w:112px;--win:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='16'%3E%3Crect x='2' y='4' width='9' height='6' fill='white' fill-opacity='.85'/%3E%3C/svg%3E");margin:0 clamp(16px,3vw,32px)}
+.carlton i:before,.carlton i:after{content:"";position:absolute;bottom:0;width:30%;height:28%;background:var(--win),var(--b)}
+.carlton i:before{right:100%}.carlton i:after{left:100%}
+.carlton:before{content:"";position:absolute;left:18%;right:18%;top:-14px;height:15px;background:var(--b)}
+.sandton,.sandton2,.stepped{--w:100px;--win:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='10'%3E%3Crect x='1' y='3' width='6' height='3' fill='white' fill-opacity='.85'/%3E%3C/svg%3E")}
+.sandton i{clip-path:polygon(0 16%,100% 0,100% 100%,0 100%)}
+.sandton2 i{clip-path:polygon(0 12%,34% 12%,34% 0,66% 0,66% 12%,100% 12%,100% 100%,0 100%)}
+.stepped i{clip-path:polygon(0 100%,0 34%,14% 34%,14% 20%,28% 20%,28% 8%,72% 8%,72% 20%,86% 20%,86% 34%,100% 34%,100% 100%)}
+.medal{position:absolute;left:50%;bottom:calc(100% + 16px);width:74px;height:74px;margin-left:-37px;border:4px solid #fff;border-radius:50%;background:#cfe9f7 center 22%/cover;box-shadow:0 0 0 3px var(--ink),0 7px 0 3px #101a3338;z-index:2;animation:bob 3.4s ease-in-out infinite alternate;animation-delay:calc(var(--k)*-.6s)}
+@keyframes bob{to{translate:0 -6px}}
+.hill .medal{width:78px;height:78px;margin-left:-39px;bottom:calc(var(--m)*1px);animation:none;transition:bottom 1.2s cubic-bezier(.3,1.35,.5,1)}
+.plate{position:absolute;left:50%;bottom:14px;width:max-content;min-width:100px;max-width:132px;transform:translateX(-50%);background:#fff;border:3px solid var(--ink);border-radius:12px;padding:5px 6px 3px;text-align:center;font-weight:700;font-size:13px;line-height:1.1;box-shadow:0 4px 0 #101a3340;z-index:2}
+.plate b{display:block;margin-top:2px;font:400 25px/1 'Luckiest Guy',Impact,sans-serif}
+.hill .plate b{color:#0d9a55}
+.plate em{display:block;margin-top:3px;font:500 11px/1.2 Fredoka,system-ui,sans-serif;font-style:normal;color:var(--muted)}
+[hidden]{display:none!important}
+.hud{display:flex;flex-wrap:wrap;gap:14px 20px;align-items:center;justify-content:space-between;margin-top:26px}
+.live{display:flex;align-items:center;gap:12px}
+.dot{width:14px;height:14px;border-radius:50%;border:3px solid var(--ink);background:#9aa6bd;flex:none}
+.dot.live{background:#ff3b4e;animation:pulse 1.4s ease-out infinite}.dot.warn{background:var(--yellow)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 #ff3b4e99}100%{box-shadow:0 0 0 12px #ff3b4e00}}
+#st{font-weight:700;font-size:18px;display:block}#sb{font-size:14px;color:var(--muted)}
+.acts{display:flex;gap:14px;align-items:center}
+.btn{font:700 15px Fredoka,system-ui,sans-serif;color:var(--ink);background:var(--yellow);border:3px solid var(--ink);border-radius:14px;padding:10px 16px;box-shadow:0 4px 0 var(--ink);cursor:pointer}
+.btn:active{translate:0 3px;box-shadow:0 1px 0 var(--ink)}
+.btn:focus-visible,a:focus-visible{outline:3px solid #0a6cff;outline-offset:3px}
+a{color:#0b5cad;font-weight:700}
+.note{margin:18px 0 0;max-width:780px;font-size:13px;line-height:1.55;color:var(--muted)}
+@media(max-width:640px){.logo{font-size:min(26vw,112px)}.wd{display:block}.hero{border-radius:22px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.cloud{left:calc(var(--t)*3)}.plane{transform:translateX(18cqw)}.plane+.plane{transform:translateX(62cqw)}}
+</style></head><body>
+<main class="wrap">
+<h1 class="logo" id="logo" aria-label="Mayor Meter">Mayor Meter</h1>
+<p class="tag">Who’s getting the keys to the mayor’s office in Johannesburg? Traders put their money on it, and the skyline moves with them.</p>
+<section class="hero" aria-label="Skyline of Johannesburg where each building’s height shows a candidate’s odds">
+<div class="sun"></div><div class="far"></div>
+<div class="cloud" style="--t:46px;--s:95s;--dl:-30s;--z:1.3"></div><div class="cloud" style="--t:120px;--s:130s;--dl:-95s;--z:.9"></div><div class="cloud" style="--t:200px;--s:110s;--dl:-60s;--z:1.6"></div><div class="cloud" style="--t:90px;--s:150s;--dl:-120s;--z:1.1"></div><div class="cloud" style="--t:260px;--s:140s;--dl:-20s;--z:1.2"></div><div class="cloud" style="--t:30px;--s:170s;--dl:-140s;--z:.8"></div><div class="cloud" style="--t:160px;--s:100s;--dl:-80s;--z:1.4"></div>
+<div class="plane" style="--t:38px;--w:250px;--s:22s;--dl:-8s"></div>
+<div class="plane" style="--t:150px;--w:170px;--s:31s;--dl:-21s"></div>
+<div class="city" id="city"></div><div class="ground"></div>
+</section>
+<div class="hud">
+<div class="live"><span class="dot" id="dot"></span><div><strong id="st" aria-live="polite">Loading odds…</strong><span id="sb"></span></div></div>
+<div class="acts"><a href="https://polymarket.com/event/next-mayor-of-johannesburg-20260609220245506" target="_blank" rel="noreferrer">Open the market</a><button class="btn" id="refresh">Update odds</button></div>
+</div>
+<p class="note">A playful picture of Polymarket trading prices, not an official poll or forecast. Prices move fast and don’t decide who becomes mayor. Candidate photos are the ones listed on Polymarket.</p>
+<noscript><p class="note">This page needs JavaScript to draw the skyline and load live odds.</p></noscript>
+</main>
+<script>
+const SLUG='next-mayor-of-johannesburg-20260609220245506',S3='https://polymarket-upload.s3.us-east-2.amazonaws.com/';
+const PHOTO={'helen-zille':'zille-5726390324.jpg','david-makhura':'will-david-makhura-be-the-next-mayor-of-johannesburg-VdOOIdTe4BoB.jpg','frank-chikane':'will-frank-chikane-be-the-next-mayor-of-johannesburg-rPLJl0K_qLq7.jpg','lukhona-mnguni':'za-570a160e1e.jpg','kenny-kunene':'ken-ebb7f39ad2.jpg','loyiso-masuku':'loy-ca7fbf089b.jpg','dada-morero':'samayor-dada-morero-547d115e75.jpg','herman-mashaba':'herman-5f55312340.jpg'};
+const slug=n=>n.toLowerCase().replace(/[^a-z]+/g,'-').replace(/^-|-$/g,'');
+const DEMO=[['Helen Zille',52,52423],['David Makhura',26.7,3873],['Frank Chikane',7.1,29164],['Lukhona Mnguni',6,832],['Kenny Kunene',5,3491],['Loyiso Masuku',4,20525],['Dada Morero',1,1296],['Herman Mashaba',1,15732]].map(([name,p,v])=>({name,key:slug(name),p,v}));
+const STY=['ponte','carlton','sandton','stepped','sandton2','carlton','ponte'];
+const PAL=[['#6d2f9c','#e0508a'],['#f0642b','#ffc247'],['#0e8f7c','#62d3b0'],['#b0306f','#f58a4a'],['#3c4fb0','#c35bd0'],['#2f9e44','#e9d84a'],['#d6453d','#ffa94d']];
+const CROWN='<svg class="crown" viewBox="0 0 120 190" aria-hidden="true"><path d="M60 0L63 50H57z" fill="#7a3b9e"/><ellipse cx="60" cy="18" rx="5" ry="3" fill="#e0508a"/><ellipse cx="60" cy="30" rx="7.5" ry="3.5" fill="#e0508a"/><circle class="tip" cx="60" cy="10" r="2.2" fill="#ff4d5a"/><circle cx="60" cy="63" r="13" fill="#7a3b9e"/><ellipse cx="60" cy="63" rx="20" ry="4.5" fill="#e0508a"/><rect x="55" y="75" width="10" height="22" fill="#7a3b9e"/><ellipse cx="60" cy="97" rx="25" ry="5" fill="#e0508a"/><rect x="36" y="97" width="48" height="60" rx="4" fill="#7a3b9e"/><rect x="42" y="107" width="36" height="34" rx="2" fill="#ffd1e3"/><path d="M54 107v34M66 107v34M42 124h36" stroke="#7a3b9e" stroke-width="2"/><ellipse cx="60" cy="158" rx="27" ry="5.5" fill="#e0508a"/><path d="M47 160H73L74 192H46z" fill="#7a3b9e"/></svg>';
+const SIL='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#cfe9f7"/><circle cx="50" cy="38" r="18" fill="#101a33"/><path d="M14 100c2-24 16-36 36-36s34 12 36 36z" fill="#101a33"/></svg>');
+const DIAL='<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="#fff" stroke="#101a33" stroke-width="9"/><path d="M19 64A34 34 0 0 1 50 16" stroke="#35d07f" stroke-width="11" fill="none"/><path d="M50 16A34 34 0 0 1 81 64" stroke="#ff5a67" stroke-width="11" fill="none"/><g class="needle"><path d="M50 52V20" stroke="#101a33" stroke-width="8" stroke-linecap="round"/><circle cx="50" cy="52" r="9" fill="#ffd23f" stroke="#101a33" stroke-width="4"/></g></svg>';
+const GRN={f:'#35c26c',p:'#27a35a',l:'#11703a'},BLK={f:'#14171e',p:'#262b36',l:'#05070a'};
+const PLANE=c=>'<svg viewBox="0 0 250 84" aria-hidden="true"><g stroke="'+c.l+'" stroke-width="2.5" stroke-linejoin="round"><path d="M20 34L6 4h30l26 30z" fill="'+c.p+'"/><path d="M12 40Q12 31 28 31H200Q246 33 248 46Q244 58 204 58H28Q12 58 12 49z" fill="'+c.f+'"/><path d="M116 52h46l-52 26H84z" fill="'+c.p+'"/><ellipse cx="146" cy="64" rx="17" ry="8" fill="'+c.p+'"/></g><ellipse cx="160" cy="64" rx="4" ry="6.5" fill="'+c.l+'"/><path d="M208 35h24q8 2 10 7h-34z" fill="#bfe9ff" stroke="'+c.l+'" stroke-width="1.5"/><path d="M62 44H196" stroke="#fff" stroke-width="3.5" stroke-dasharray="3.5 6" stroke-linecap="round"/><text x="68" y="39" font-family="Fredoka,Arial,sans-serif" font-weight="700" font-size="11" letter-spacing=".5" fill="#fff">flysafair</text></svg>';
+const $=s=>document.querySelector(s),city=$('#city'),cards=new Map();
+document.querySelectorAll('.plane').forEach((p,i)=>p.innerHTML=PLANE(i?BLK:GRN));
+(()=>{const lg=$('#logo'),pal=['#35d07f','#ffd23f','#fff','#ff8a3d'];lg.textContent='';let n=0;
+'MAYOR METER'.split(' ').forEach((w,wi)=>{const wd=document.createElement('span');wd.className='wd';
+[...w].forEach(ch=>{const s=document.createElement('span');s.style.setProperty('--i',n);s.style.setProperty('--c',pal[n%4]);s.style.setProperty('--r',((n%2?-1:1)*(2+(n%3)*2.5))+'deg');
+if(ch==='O'&&wi===0){s.className='dial';s.innerHTML=DIAL}else s.textContent=ch;wd.append(s);n++});
+lg.append(wd,wi?'':' ')})})();
+const resolved={};
+function loadPhoto(c,el){const set=u=>el.style.backgroundImage='url("'+u+'")';
+if(resolved[c.key])return set(resolved[c.key]);
+const list=['photos/'+c.key+'.jpg','photos/'+c.key+'.png',c.image,PHOTO[c.key]&&S3+PHOTO[c.key]].filter(Boolean);
+(function next(i){if(i>=list.length)return set(SIL);const im=new Image();im.referrerPolicy='no-referrer';im.onload=()=>{resolved[c.key]=list[i];set(list[i])};im.onerror=()=>next(i+1);im.src=list[i]})(0)}
+function make(c,pos){const b=document.createElement('div');b.className='bld '+c.cls;b.dataset.cls=c.cls;b.style.setProperty('--k',pos);b.style.setProperty('--h','0px');if(c.cls!=='hill'){const p=PAL[pos%PAL.length];b.style.setProperty('--a',p[0]);b.style.setProperty('--b',p[1])}
+b.innerHTML='<div class="body"><i></i></div>'+(c.cls==='hill'?CROWN:'')+'<div class="medal" role="img" aria-label="'+c.name+'"></div><div class="plate"><span>'+c.name+'</span><b>0%</b><em></em></div>';
+loadPhoto(c,b.querySelector('.medal'));city.append(b);b.offsetHeight;return b}
+function tween(el,to,fmt){const from=+el.dataset.v||0;el.dataset.v=to;const t0=performance.now();(function f(t){const k=Math.min(1,(t-t0)/900),e=1-Math.pow(1-k,3);el.textContent=fmt(from+(to-from)*e);if(k<1)requestAnimationFrame(f)})(t0)}
+function draw(list){list=[...list].sort((a,b)=>b.p-a.p).slice(0,8);
+list.forEach((c,i)=>c.rank=i);
+const main=list.find(c=>/zille/i.test(c.name))||list[0],rest=list.filter(c=>c!==main),L=[],R=[],keep=new Set();
+rest.forEach((c,i)=>{c.cls=STY[i%STY.length];i%2?R.push(c):L.unshift(c)});main.cls='hill';
+[...L,main,...R].forEach((c,pos)=>{keep.add(c.key);let b=cards.get(c.key);
+if(b&&b.dataset.cls!==c.cls){b.remove();b=null}
+if(!b){b=make(c,pos);cards.set(c.key,b)}
+b.style.order=pos;const M=300-24*c.rank;b.style.setProperty('--h',(c===main?390:M-16)+'px');b.style.setProperty('--m',M);
+tween(b.querySelector('b'),c.p,v=>v.toFixed(1)+'%');const em=b.querySelector('em');if(c.v>0){em.hidden=false;tween(em,c.v,v=>'$'+Math.round(v).toLocaleString('en-US')+' traded')}else em.hidden=true});
+cards.forEach((b,k)=>{if(!keep.has(k)){b.remove();cards.delete(k)}})}
+const J=v=>typeof v==='string'?JSON.parse(v):(v||[]);
+function parse(ev){return(ev.markets||[]).filter(m=>!m.closed&&m.active!==false).map(m=>{const pr=J(m.outcomePrices),out=J(m.outcomes);let i=out.findIndex(o=>/^yes$/i.test(o));if(i<0)i=0;
+const name=(m.groupItemTitle||(m.question||'').replace(/^Will\s+|\s+(be|win)\b.*$/gi,'')).trim();
+return{name,key:slug(name),p:+pr[i]*100,v:+(m.volumeNum??m.volume)||0,image:m.image||m.icon}}).filter(c=>c.name&&isFinite(c.p)&&!/^(person|other|candidate)\b/i.test(c.name))}
+async function getEvent(){for(const u of['https://gamma-api.polymarket.com/events?slug='+SLUG,'/api/odds']){try{const r=await fetch(u,{cache:'no-store',signal:AbortSignal.timeout(9000)});if(!r.ok)continue;let d=await r.json();d=Array.isArray(d)?d[0]:d;if(d&&d.markets)return d}catch(e){}}throw Error('no feed')}
+let mode='load',last=0,vol='';const dot=$('#dot'),st=$('#st'),sb=$('#sb');
+function status(){const a=Math.max(0,Math.round((Date.now()-last)/1000));
+if(mode==='live'){dot.className='dot live';st.textContent='Live from Polymarket';sb.textContent='Updated '+(a<5?'just now':a+'s ago')+(vol?', '+vol+' traded':'')}
+else if(mode==='saved'){dot.className='dot warn';st.textContent='Polymarket isn’t responding';sb.textContent='Showing the last odds saved at '+new Date(last).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}
+else if(mode==='demo'){dot.className='dot';st.textContent='Sample odds, not live';sb.textContent='This browser couldn’t reach Polymarket. Press Update odds to retry.'}}
+async function load(){try{const ev=await getEvent(),list=parse(ev);if(!list.length)throw 0;draw(list);last=Date.now();mode='live';
+const v=+ev.volume;vol=v?'$'+(v>=1e3?Math.round(v/1e3)+'K':Math.round(v)):'';
+try{localStorage.setItem('mm',JSON.stringify({t:last,list,vol}))}catch(e){}}
+catch(e){if(mode==='live'||mode==='saved')mode='saved';else{let s=null;try{s=JSON.parse(localStorage.getItem('mm'))}catch(x){}
+if(s&&s.list){draw(s.list);last=s.t;mode='saved'}else{draw(DEMO);mode='demo'}}}
+status()}
+$('#refresh').addEventListener('click',load);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-last>30000)load()});
+setInterval(load,30000);setInterval(status,1000);load();
+</script></body></html>
