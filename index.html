@@ -1,6 +1,10 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Who will be Johannesburg’s next mayor? Watch the live odds as a moving skyline.">
+<meta property="og:title" content="Mayor Meter">
+<meta property="og:description" content="Who will be Johannesburg’s next mayor? Watch the live odds as a moving skyline.">
+<meta property="og:type" content="website">
 <title>Mayor Meter: who will be Johannesburg’s next mayor?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Luckiest+Guy&display=swap" rel="stylesheet">
@@ -75,6 +79,17 @@ body{margin:0;background:#eaf8ff;color:var(--ink);font:500 16px/1.4 Fredoka,ui-r
 a{color:#0b5cad;font-weight:700}
 .note{margin:18px 0 0;max-width:780px;font-size:13px;line-height:1.55;color:var(--muted)}
 .credit{margin:26px 0 0;text-align:center;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--muted)}
+.tools{position:absolute;left:16px;top:16px;z-index:6;display:flex;gap:10px;flex-wrap:wrap}
+.share,.play{display:flex;align-items:center;gap:8px;font-size:16px;text-decoration:none}
+.play{background:var(--green)}
+.pop{position:absolute;left:16px;top:72px;z-index:6;width:min(290px,calc(100% - 32px));background:#fff;border:3px solid var(--ink);border-radius:18px;box-shadow:0 6px 0 var(--ink);padding:12px}
+.pop h2{margin:0 0 10px;font:400 22px 'Luckiest Guy',Impact,sans-serif;letter-spacing:.03em}
+.pop .g{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pop .it{display:block;text-align:center;text-decoration:none;font:700 15px Fredoka,system-ui,sans-serif;color:var(--ink);background:#eaf8ff;border:3px solid var(--ink);border-radius:12px;padding:9px 6px;cursor:pointer}
+.pop .it:hover{background:var(--yellow)}.pop .it:focus-visible{outline:3px solid #0a6cff;outline-offset:2px}
+.pop .cp{grid-column:1/-1;background:var(--green)}
+.pop .x{display:block;margin:10px auto 0;background:none;border:0;font:700 14px Fredoka,system-ui,sans-serif;color:var(--muted);cursor:pointer;text-decoration:underline}
+@media(max-width:480px){.pop{top:128px}}
 @media(max-width:640px){.logo{font-size:min(26vw,112px)}.wd{display:block}.hero{border-radius:22px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.cloud{left:calc(var(--t)*3)}.plane{transform:translateX(18cqw)}.plane+.plane{transform:translateX(62cqw)}}
 </style></head><body>
@@ -82,6 +97,8 @@ a{color:#0b5cad;font-weight:700}
 <h1 class="logo" id="logo" aria-label="Mayor Meter">Mayor Meter</h1>
 <p class="tag">Who’s getting the keys to the mayor’s office in Johannesburg? Traders put their money on it, and the skyline moves with them.</p>
 <section class="hero" aria-label="Skyline of Johannesburg where each building’s height shows a candidate’s odds">
+<div class="tools"><button class="btn share" id="share" type="button" aria-haspopup="dialog" aria-expanded="false"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="#101a33" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.6l6.8-4M8.6 13.4l6.8 4"/></svg>Share</button><a class="btn play" href="games.html"><span aria-hidden="true">🎮</span> Play the arcade</a></div>
+<div class="pop" id="pop" role="dialog" aria-label="Share Mayor Meter" hidden></div>
 <div class="sun"></div><div class="far"></div>
 <div class="cloud" style="--t:46px;--s:95s;--dl:-30s;--z:1.3"></div><div class="cloud" style="--t:120px;--s:130s;--dl:-95s;--z:.9"></div><div class="cloud" style="--t:200px;--s:110s;--dl:-60s;--z:1.6"></div><div class="cloud" style="--t:90px;--s:150s;--dl:-120s;--z:1.1"></div><div class="cloud" style="--t:260px;--s:140s;--dl:-20s;--z:1.2"></div><div class="cloud" style="--t:30px;--s:170s;--dl:-140s;--z:.8"></div><div class="cloud" style="--t:160px;--s:100s;--dl:-80s;--z:1.4"></div>
 <div class="plane" style="--t:38px;--w:250px;--s:22s;--dl:-8s"></div>
@@ -100,7 +117,7 @@ a{color:#0b5cad;font-weight:700}
 const SLUG='next-mayor-of-johannesburg-20260609220245506',S3='https://polymarket-upload.s3.us-east-2.amazonaws.com/';
 const PHOTO={'helen-zille':'zille-5726390324.jpg','david-makhura':'will-david-makhura-be-the-next-mayor-of-johannesburg-VdOOIdTe4BoB.jpg','frank-chikane':'will-frank-chikane-be-the-next-mayor-of-johannesburg-rPLJl0K_qLq7.jpg','lukhona-mnguni':'za-570a160e1e.jpg','kenny-kunene':'ken-ebb7f39ad2.jpg','loyiso-masuku':'loy-ca7fbf089b.jpg','dada-morero':'samayor-dada-morero-547d115e75.jpg','herman-mashaba':'herman-5f55312340.jpg'};
 const slug=n=>n.toLowerCase().replace(/[^a-z]+/g,'-').replace(/^-|-$/g,'');
-const DEMO=[['Helen Zille',52,52423],['David Makhura',26.7,3873],['Frank Chikane',7.1,29164],['Lukhona Mnguni',6,832],['Kenny Kunene',5,3491],['Loyiso Masuku',4,20525],['Dada Morero',1,1296],['Herman Mashaba',1,15732]].map(([name,p,v])=>({name,key:slug(name),p,v}));
+const SNAPSHOT=[['Helen Zille',55,55216],['David Makhura',15.8,4510],['Frank Chikane',7.8,30836],['Herman Mashaba',7,17404],['Lukhona Mnguni',6,1010],['Loyiso Masuku',3,20823],['Kenny Kunene',2,3825],['Dada Morero',1,1530]].map(([name,p,v])=>({name,key:slug(name),p,v}));
 const STY=['ponte','carlton','sandton','stepped','sandton2','carlton','ponte'];
 const PAL=[['#6d2f9c','#e0508a'],['#f0642b','#ffc247'],['#0e8f7c','#62d3b0'],['#b0306f','#f58a4a'],['#3c4fb0','#c35bd0'],['#2f9e44','#e9d84a'],['#d6453d','#ffa94d']];
 const CROWN='<svg class="crown" viewBox="0 0 120 190" aria-hidden="true"><path d="M60 0L63 50H57z" fill="#7a3b9e"/><ellipse cx="60" cy="18" rx="5" ry="3" fill="#e0508a"/><ellipse cx="60" cy="30" rx="7.5" ry="3.5" fill="#e0508a"/><circle class="tip" cx="60" cy="10" r="2.2" fill="#ff4d5a"/><circle cx="60" cy="63" r="13" fill="#7a3b9e"/><ellipse cx="60" cy="63" rx="20" ry="4.5" fill="#e0508a"/><rect x="55" y="75" width="10" height="22" fill="#7a3b9e"/><ellipse cx="60" cy="97" rx="25" ry="5" fill="#e0508a"/><rect x="36" y="97" width="48" height="60" rx="4" fill="#7a3b9e"/><rect x="42" y="107" width="36" height="34" rx="2" fill="#ffd1e3"/><path d="M54 107v34M66 107v34M42 124h36" stroke="#7a3b9e" stroke-width="2"/><ellipse cx="60" cy="158" rx="27" ry="5.5" fill="#e0508a"/><path d="M47 160H73L74 192H46z" fill="#7a3b9e"/></svg>';
@@ -132,25 +149,48 @@ rest.forEach((c,i)=>{c.cls=STY[i%STY.length];i%2?R.push(c):L.unshift(c)});main.c
 if(b&&b.dataset.cls!==c.cls){b.remove();b=null}
 if(!b){b=make(c,pos);cards.set(c.key,b)}
 b.style.order=pos;const M=300-24*c.rank;b.style.setProperty('--h',(c===main?390:M-16)+'px');b.style.setProperty('--m',M);
-tween(b.querySelector('b'),c.p,v=>v.toFixed(1)+'%');const em=b.querySelector('em');if(c.v>0){em.hidden=false;tween(em,c.v,v=>'$'+Math.round(v).toLocaleString('en-US')+' traded')}else em.hidden=true});
+tween(b.querySelector('b'),c.p,v=>v.toFixed(1)+'%');const em=b.querySelector('em');if(c.v>0){em.hidden=false;em.title='US$'+Math.round(c.v).toLocaleString('en-US')+' traded';tween(em,c.v,v=>money(v)+' traded')}else em.hidden=true});
 cards.forEach((b,k)=>{if(!keep.has(k)){b.remove();cards.delete(k)}})}
 const J=v=>typeof v==='string'?JSON.parse(v):(v||[]);
 function parse(ev){return(ev.markets||[]).filter(m=>!m.closed&&m.active!==false).map(m=>{const pr=J(m.outcomePrices),out=J(m.outcomes);let i=out.findIndex(o=>/^yes$/i.test(o));if(i<0)i=0;
 const name=(m.groupItemTitle||(m.question||'').replace(/^Will\s+|\s+(be|win)\b.*$/gi,'')).trim();
 return{name,key:slug(name),p:+pr[i]*100,v:+(m.volumeNum??m.volume)||0,image:m.image||m.icon}}).filter(c=>c.name&&isFinite(c.p)&&!/^(person|other|candidate)\b/i.test(c.name))}
 async function getEvent(){for(const u of['https://gamma-api.polymarket.com/events?slug='+SLUG,'/api/odds']){try{const r=await fetch(u,{cache:'no-store',signal:AbortSignal.timeout(9000)});if(!r.ok)continue;let d=await r.json();d=Array.isArray(d)?d[0]:d;if(d&&d.markets)return d}catch(e){}}throw Error('no feed')}
-let mode='load',last=0,vol='';const dot=$('#dot'),st=$('#st'),sb=$('#sb');
+let rate=0,fxT=0;try{rate=+localStorage.getItem('mmfx')||0;fxT=+localStorage.getItem('mmfxt')||0}catch(e){}
+const short=x=>x>=1e6?(x/1e6).toFixed(1)+'M':x>=1e3?Math.round(x/1e3)+'K':Math.round(x)+'';
+const money=v=>rate?'R'+Math.round(v*rate).toLocaleString('en-ZA'):'$'+Math.round(v).toLocaleString('en-US');
+const compact=v=>rate?'R'+short(v*rate):'$'+short(v);
+async function fx(){if(rate&&Date.now()-fxT<18e5)return;
+for(const u of['https://api.frankfurter.dev/v1/latest?base=USD&symbols=ZAR','https://open.er-api.com/v6/latest/USD']){try{const r=await fetch(u,{signal:AbortSignal.timeout(6000)});if(!r.ok)continue;const z=+(await r.json()).rates.ZAR;
+if(z>0){rate=z;fxT=Date.now();try{localStorage.setItem('mmfx',z);localStorage.setItem('mmfxt',fxT)}catch(e){}document.querySelectorAll('.plate em').forEach(e=>{if(!e.hidden)e.textContent=money(+e.dataset.v)+' traded'});return}}catch(e){}}}
+let mode='load',last=0,vol=0;const dot=$('#dot'),st=$('#st'),sb=$('#sb');
 function status(){const a=Math.max(0,Math.round((Date.now()-last)/1000));
-if(mode==='live'){dot.className='dot live';st.textContent='Live from Polymarket';sb.textContent='Updated '+(a<5?'just now':a+'s ago')+(vol?', '+vol+' traded':'')}
+if(mode==='live'){dot.className='dot live';st.textContent='Live from Polymarket';sb.textContent='Updated '+(a<5?'just now':a+'s ago')+(vol?', '+compact(vol)+' traded'+(rate?' (US$1 = R'+rate.toFixed(2)+')':''):'')}
 else if(mode==='saved'){dot.className='dot warn';st.textContent='Polymarket isn’t responding';sb.textContent='Showing the last odds saved at '+new Date(last).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}
-else if(mode==='demo'){dot.className='dot';st.textContent='Sample odds, not live';sb.textContent='This browser couldn’t reach Polymarket. Press Update odds to retry.'}}
-async function load(){try{const ev=await getEvent(),list=parse(ev);if(!list.length)throw 0;draw(list);last=Date.now();mode='live';
-const v=+ev.volume;vol=v?'$'+(v>=1e3?Math.round(v/1e3)+'K':Math.round(v)):'';
+else if(mode==='snapshot'){dot.className='dot';st.textContent='Saved snapshot, not live';sb.textContent='Couldn’t reach Polymarket. These are the prices from 27 Oct 2026. Press Update odds to retry.'}}
+async function load(){try{const[ev]=await Promise.all([getEvent(),fx()]),list=parse(ev);if(!list.length)throw 0;draw(list);last=Date.now();mode='live';
+vol=+ev.volume||0;
 try{localStorage.setItem('mm',JSON.stringify({t:last,list,vol}))}catch(e){}}
 catch(e){if(mode==='live'||mode==='saved')mode='saved';else{let s=null;try{s=JSON.parse(localStorage.getItem('mm'))}catch(x){}
-if(s&&s.list){draw(s.list);last=s.t;mode='saved'}else{draw(DEMO);mode='demo'}}}
+if(s&&s.list){await fx();draw(s.list);last=s.t;vol=+s.vol||0;mode='saved'}else{await fx();draw(SNAPSHOT);mode='snapshot'}}}
 status()}
 $('#refresh').addEventListener('click',load);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-last>30000)load()});
 setInterval(load,30000);setInterval(status,1000);load();
+
+(()=>{const btn=$('#share'),pop=$('#pop'),TXT='Who will be Johannesburg’s next mayor? Watch the live odds on Mayor Meter.';
+const url=()=>/^https?:/.test(location.protocol)?location.origin+location.pathname:location.href,q=encodeURIComponent;
+const L=[['WhatsApp',()=>'https://wa.me/?text='+q(TXT+' '+url())],['X',()=>'https://twitter.com/intent/tweet?text='+q(TXT)+'&url='+q(url())],['Facebook',()=>'https://www.facebook.com/sharer/sharer.php?u='+q(url())],['Telegram',()=>'https://t.me/share/url?url='+q(url())+'&text='+q(TXT)],['Email',()=>'mailto:?subject='+q('Mayor Meter')+'&body='+q(TXT+'\n\n'+url())]];
+pop.innerHTML='<h2>Share Mayor Meter</h2><div class="g">'+L.map(([n],i)=>'<a class="it" data-i="'+i+'" target="_blank" rel="noopener noreferrer">'+n+'</a>').join('')+'<button class="it cp" type="button">Copy link</button></div><button class="x" type="button">Close</button>';
+const cp=pop.querySelector('.cp');
+const close=(f)=>{if(pop.hidden)return;pop.hidden=true;btn.setAttribute('aria-expanded','false');if(f)btn.focus()};
+const open=()=>{pop.querySelectorAll('a.it').forEach(a=>a.href=L[a.dataset.i][1]());pop.hidden=false;btn.setAttribute('aria-expanded','true');pop.querySelector('.it').focus()};
+btn.addEventListener('click',async()=>{if(!pop.hidden)return close(true);
+if(navigator.share){try{await navigator.share({title:'Mayor Meter',text:TXT,url:url()});return}catch(e){if(e&&e.name==='AbortError')return}}open()});
+cp.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(url())}catch(e){const t=document.createElement('textarea');t.value=url();document.body.append(t);t.select();try{document.execCommand('copy')}catch(x){}t.remove()}
+cp.textContent='Link copied!';setTimeout(()=>cp.textContent='Copy link',1800)});
+pop.querySelector('.x').addEventListener('click',()=>close(true));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')close(true)});
+document.addEventListener('click',e=>{if(!pop.hidden&&!pop.contains(e.target)&&!btn.contains(e.target))close(false)});
+})();
 </script></body></html>
